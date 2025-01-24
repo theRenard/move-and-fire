@@ -1,6 +1,6 @@
 
 -- enable extended map
-poke(0x5f56, 0x80)
+-- poke(0x5f56, 0x80)
 
 function _init()
 	scene:load(title_scene)
