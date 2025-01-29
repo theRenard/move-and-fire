@@ -16,7 +16,7 @@ function _update60()
 end
 
 function _draw()
-	cls(1)
+	cls(12)
 
 	scene.current:draw()
 end

@@ -16,6 +16,6 @@ shot=entity:extend({
   end,
 
   draw=function(_ENV)
-    pset(x,y,7)
+    spr(11,x,y)
   end,
 })
