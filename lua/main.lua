@@ -3,10 +3,10 @@
 -- poke(0x5f56, 0x80)
 
 function _init()
-	scene:load(title_scene)
+	scene:load(game_scene)
 end
 
-function _update()
+function _update60()
 	scene.current:update()
 end
 

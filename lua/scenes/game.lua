@@ -13,13 +13,13 @@ game_scene = scene:extend({
   w = 32,
   h = 32,
   maze = {},
-  _player = {},
+  _ship = {},
   cam_x = 0,
   cam_y = 0,
   init = function(_ENV)
 
     -- -- spawn player
-    _player = person()
+    _ship = ship()
 
     --   -- destroy if colliding
     --   obj:detect(
@@ -35,12 +35,8 @@ game_scene = scene:extend({
   end,
 
   draw = function(_ENV)
+    cls(2)
     -- add(entity.pool, del(entity.pool, player))
-    cam_x = _player.x - 64
-    cam_y = _player.y - 64
-    -- camera(cam_x, cam_y)
-    map(0, 0, 0, 0, w, h)
     entity:each("draw")
-    -- camera()
   end
 })

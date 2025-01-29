@@ -1,7 +1,5 @@
---player functions from https://mboffin.itch.io/pico8-movement-with-inertia
-
--- person
-person=entity:extend({
+-- Ship entity
+ship=entity:extend({
 	x=60,
 	y=60,
 	w=7,
@@ -49,7 +47,7 @@ person=entity:extend({
 	end,
 
 	draw=function(_ENV)
-		prints("😐",x,y,7)
+		print("😐",x,y,7)
 		print(dx)
 	end,
 })

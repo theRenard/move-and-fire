@@ -1,2 +1,2 @@
-# move-and-fire
+# advanced shmup game
  
