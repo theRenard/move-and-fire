@@ -1,7 +1,3 @@
--- class
-global=_ENV
-noop=function()end
-
 class = setmetatable(
   {
     extend = function(self, tbl)

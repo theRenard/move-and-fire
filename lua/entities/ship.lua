@@ -1,34 +1,43 @@
 -- Ship entity
-ship=entity:extend({
-	x=60,
-	y=60,
-	w=7,
-	h=5,
+ship = entity:extend({
+	x = 60,
+	y = 60,
+	w = 7,
+	h = 5,
 
-	dx=0,
-	dy=0,
-	spd=1,
+	dx = 0,
+	dy = 0,
+	spd = 1,
 
-	sprts={1, 3, 5, 7, 9},
-	sprt=0,
+	sprts = { 1, 3, 5, 7, 9 },
+	sprt = 0,
 
-	update=function(_ENV)
-		dx,dy=0,0
+	fire = function(_ENV)
+		-- spawn bullet
+		-- add(shots, {x=x+3, y=y-2})
+		shot({
+			x = x + 3,
+			y = y - 2
+		})
+	end,
 
-		if (btn(⬆️)) dy-=spd
-		if (btn(⬇️)) dy+=spd
-		if (btn(⬅️)) dx-=spd
-		if (btn(➡️)) dx+=spd
+	update = function(_ENV)
+		dx, dy = 0, 0
 
-		if dx!=0 or dy !=0 then
+		if (btn(⬆️)) dy -= spd
+		if (btn(⬇️)) dy += spd
+		if (btn(⬅️)) dx -= spd
+		if (btn(➡️)) dx += spd
+		if (btn(🅾️)) fire(_ENV)
+
+		if dx != 0 or dy != 0 then
 			-- normalize movement
-			local a=atan2(dx,dy)
-			x+=cos(a)
-			y+=sin(a)
+			local a = atan2(dx, dy)
+			x += cos(a)
+			y += sin(a)
 
-			x=flr(x)+0.5
-			y=flr(y)+0.5
-
+			x = flr(x) + 0.5
+			y = flr(y) + 0.5
 
 			-- spawn dust each 3/10 sec
 			-- if (t()*10)\1%3==0 then
@@ -41,12 +50,12 @@ ship=entity:extend({
 		end
 
 		-- restrict movement
-		x=mid(7,x,114)
-		y=mid(15,y,116)
+		x = mid(7, x, 114)
+		y = mid(15, y, 116)
 	end,
 
-	draw=function(_ENV)
-		spr(sprts[flr(sprt*2.4+3.5)],x,y,2,2)
+	draw = function(_ENV)
+		spr(sprts[flr(sprt * 2.4 + 3.5)], x, y, 2, 2)
 		-- pset(x,y,7)
-	end,
+	end
 })
