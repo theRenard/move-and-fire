@@ -12,13 +12,18 @@ ship = entity:extend({
 	sprts = { 1, 3, 5, 7, 9 },
 	sprt = 0,
 
+	shotDly = 0,
+
 	fire = function(_ENV)
 		-- spawn bullet
 		-- add(shots, {x=x+3, y=y-2})
-		shot({
-			x = x + 3,
-			y = y - 2
-		})
+		if shotDly == 0 then
+			shot({
+				x = x + 3,
+				y = y - 2
+			})
+			shotDly = 5
+		end
 	end,
 
 	update = function(_ENV)
@@ -52,10 +57,15 @@ ship = entity:extend({
 		-- restrict movement
 		x = mid(7, x, 114)
 		y = mid(15, y, 116)
+
+		if shotDly > 0 then
+			shotDly -= 1
+		end
 	end,
 
 	draw = function(_ENV)
 		spr(sprts[flr(sprt * 2.4 + 3.5)], x, y, 2, 2)
 		-- pset(x,y,7)
+		print(#shot.pool, 5, 5, 7)
 	end
 })

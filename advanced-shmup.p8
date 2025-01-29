@@ -7,8 +7,8 @@ __lua__
 #include lua/debug.lua
 #include lua/classes.lua
 #include lua/scenes/game.lua
-#include lua/entities/shot.lua
 #include lua/entities/ship.lua
+#include lua/entities/shot.lua
 #include lua/particles.lua
 #include lua/utilities.lua
 #include lua/main.lua

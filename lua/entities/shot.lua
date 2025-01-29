@@ -5,6 +5,7 @@ shot=entity:extend({
   h=1,
 
   spd=2,
+  pool={},
 
   update=function(_ENV)
     y-=spd
