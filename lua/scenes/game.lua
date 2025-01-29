@@ -35,7 +35,7 @@ game_scene = scene:extend({
   end,
 
   draw = function(_ENV)
-    cls(2)
+    -- cls(2)
     -- add(entity.pool, del(entity.pool, player))
     entity:each("draw")
   end
