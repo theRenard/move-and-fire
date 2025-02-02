@@ -1,76 +1,113 @@
 -- Ship entity
+engine = entity:extend({
+	x = 0,
+	y = 0,
+	frames = { 12, 13, 14 },
+	frame = 0,
+
+	setPos = function(_ENV, _x, _y)
+		x = _x
+		y = _y
+	end,
+
+	update = function(_ENV)
+		local f = ((t() * 10) \ 1 % 3) + 1
+		frame = frames[f]
+
+		-- spawn dust each 3/10 sec
+		-- if (t() * 10) \ 1 % 3 == 0 then
+		-- 	dust({
+		-- 		x = x + rnd(3),
+		-- 		y = y + 4,
+		-- 		frames = 18 + rnd(4)
+		-- 	})
+		-- end
+	end,
+
+	draw = function(_ENV)
+		-- spr(frame, x + 2, y + 16)
+		-- spr(frame, x + 6, y + 16, 1, 1, true)
+	end
+})
+
 ship = entity:extend({
 	x = 60,
 	y = 60,
 	w = 7,
 	h = 5,
+	xx = x,
+	yy = y,
 
 	dx = 0,
 	dy = 0,
-	spd = 1.4,
+	spd = 2.8,
 
-	sprts = { 1, 3, 5, 7, 9 },
-	sprt = 0,
+	frames = { 1, 3, 5, 7, 9 },
+	frame = 0,
 
 	shotTemp = 0,
+	_engine = engine(),
 
 	fire = function(_ENV)
 		-- spawn bullet
 		-- add(shots, {x=x+3, y=y-2})
 		if shotTemp == 0 then
 			shot({
-				x = x + 3,
-				y = y - 2
+				x = x,
+				y = y + 2,
+				frames = {32, 33, 34},
+				sh = 2,
+				spd = 10
 			})
-			shotTemp = 5
+			shot({
+				x = x + 12,
+				y = y + 2,
+				frames = {32, 33, 34},
+				sh = 2,
+				spd = 10
+			})
+			shotTemp = 2
 		end
 	end,
 
 	update = function(_ENV)
 		dx, dy, sx = 0, 0, 0
 
-		if (btn(⬆️)) dy -= 1
-		if (btn(⬇️)) dy += 1
-		if (btn(⬅️)) dx -= 1
-		if (btn(➡️)) dx += 1
+		if (btn(⬆️)) dy -= spd
+		if (btn(⬇️)) dy += spd
+		if (btn(⬅️)) dx -= spd
+		if (btn(➡️)) dx += spd
 		if (btn(🅾️)) fire(_ENV)
 		if dx != 0 or dy != 0 then
 			-- normalize movement
 			local a = atan2(dx, dy)
 
 			sx = cos(a) * spd
-			y += sin(a) * spd
+			sy = sin(a) * spd
 
-			x = flr(x + sx) + 0.5
-			y = flr(y) + 0.5
+			x += sx
+			y += sy
 
-			-- spawn dust each 3/10 sec
-			-- if (t()*10)\1%3==0 then
-			-- 	dust({
-			-- 		x=x+rnd(3),
-			-- 		y=y+4,
-			-- 		frames=18+rnd(4),
-			-- 	})
-			-- end
 		end
 
-		-- restrict movement
-		x = mid(7, x, 114)
-		y = mid(15, y, 116)
+		xx = flr(x) + 0.5
+		yy = flr(y) + 0.5
 
-		sprt += (sx - sprt) * 0.15
-		sprt = mid(-1, sprt, 1)
+		-- restrict movement
+		x = mid(0, x, 127)
+		y = mid(0, y, 127)
+
+		frame += (sx - frame) * 0.15
+		frame = mid(-1, frame, 1)
 
 		if shotTemp > 0 then
 			shotTemp -= 1
 		end
+
+		_engine:setPos(x, y)
 	end,
 
 	draw = function(_ENV)
-		spr(sprts[flr(sprt * 2.4 + 3.5)], x, y, 2, 2)
-		-- pset(x,y,7)
-		print(#shot.pool, 5, 5, 7)
-		print(sx)
-		print(sprt)
+		spr(frames[flr(frame * 2.4 + 3.5)], xx, yy, 2, 2)
 	end
 })
