@@ -58,7 +58,7 @@ ship = entity:extend({
 				frames = { 32, 33, 34 },
 				sh = 2,
 				spd = 6,
-				si = t() * 60 \ 10 % 3
+				si = (t() * 60 \ 10) / 2 % 3 + 1
 			})
 			shot({
 				x = x + 12,
@@ -66,7 +66,7 @@ ship = entity:extend({
 				frames = { 32, 33, 34 },
 				sh = 2,
 				spd = 6,
-				si = t() * 60 \ 10 % 3
+				si = (t() * 60 \ 10) / 2 % 3 + 1
 			})
 			shotTemp = 3
 		end
