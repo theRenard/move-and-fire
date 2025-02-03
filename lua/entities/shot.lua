@@ -10,12 +10,15 @@ shot = entity:extend({
 
   frames = { 11 },
   frame = 0,
+  si = 1,
 
   update = function(_ENV)
     y -= spd
+    si += .5
 
-		local f = (t() * 60 \ 10 % #frames) + 1
-		frame = frames[f]
+    if si > #frames then
+      si = 1
+    end
 
     if y < 0 then
       destroy(_ENV)
@@ -23,6 +26,6 @@ shot = entity:extend({
   end,
 
   draw = function(_ENV)
-    spr(frame, x, y, 1, sh)
+    spr(frames[flr(si)], x, y, 1, sh)
   end
 })

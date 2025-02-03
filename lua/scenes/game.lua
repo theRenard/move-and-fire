@@ -1,14 +1,3 @@
--- TODO:
--- 1. movement
--- 2. animations
--- 3.- wall collision
--- 4. object interaction
--- 5. message system
--- 6. combat system
--- 7. fog of war
--- 8. pathfinding
--- 9. throw
-
 game_scene = scene:extend({
   w = 32,
   h = 32,
@@ -36,7 +25,7 @@ game_scene = scene:extend({
 
   draw = function(_ENV)
     -- cls(2)
-    -- add(entity.pool, del(entity.pool, player))
+    -- add(entity.pool, del(entity.pool, _ship))
     entity:each("draw")
   end
 })

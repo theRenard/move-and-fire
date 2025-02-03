@@ -2,7 +2,7 @@
 engine = entity:extend({
 	x = 0,
 	y = 0,
-	frames = { 12, 13, 14 },
+	frames = { 12, 13, 14, 13 },
 	frame = 0,
 
 	setPos = function(_ENV, _x, _y)
@@ -11,7 +11,7 @@ engine = entity:extend({
 	end,
 
 	update = function(_ENV)
-		local f = ((t() * 10) \ 1 % 3) + 1
+		local f = ((t() * 60) \ 3 % 4) + 1
 		frame = frames[f]
 
 		-- spawn dust each 3/10 sec
@@ -25,8 +25,8 @@ engine = entity:extend({
 	end,
 
 	draw = function(_ENV)
-		-- spr(frame, x + 2, y + 16)
-		-- spr(frame, x + 6, y + 16, 1, 1, true)
+		spr(frame, x + 3, y + 15)
+		spr(frame, x + 5, y + 15, 1, 1, true)
 	end
 })
 
@@ -40,7 +40,7 @@ ship = entity:extend({
 
 	dx = 0,
 	dy = 0,
-	spd = 2.8,
+	spd = 1.4,
 
 	frames = { 1, 3, 5, 7, 9 },
 	frame = 0,
@@ -53,20 +53,22 @@ ship = entity:extend({
 		-- add(shots, {x=x+3, y=y-2})
 		if shotTemp == 0 then
 			shot({
-				x = x,
+				x = x - 3,
 				y = y + 2,
-				frames = {32, 33, 34},
+				frames = { 32, 33, 34 },
 				sh = 2,
-				spd = 10
+				spd = 6,
+				si = t() * 60 \ 10 % 3
 			})
 			shot({
 				x = x + 12,
 				y = y + 2,
-				frames = {32, 33, 34},
+				frames = { 32, 33, 34 },
 				sh = 2,
-				spd = 10
+				spd = 6,
+				si = t() * 60 \ 10 % 3
 			})
-			shotTemp = 2
+			shotTemp = 3
 		end
 	end,
 
@@ -87,7 +89,6 @@ ship = entity:extend({
 
 			x += sx
 			y += sy
-
 		end
 
 		xx = flr(x) + 0.5
@@ -108,6 +109,7 @@ ship = entity:extend({
 	end,
 
 	draw = function(_ENV)
+		add(entity.pool, del(entity.pool, _engine))
 		spr(frames[flr(frame * 2.4 + 3.5)], xx, yy, 2, 2)
 	end
 })
