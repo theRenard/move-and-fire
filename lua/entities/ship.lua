@@ -2,6 +2,7 @@
 engine = entity:extend({
 	x = 0,
 	y = 0,
+	z = 15,
 	frames = { 12, 13, 14, 13 },
 	frame = 0,
 
@@ -31,7 +32,7 @@ engine = entity:extend({
 })
 
 ship = entity:extend({
-	z = 2,
+	z = 20,
 	x = 60,
 	y = 60,
 	w = 7,
@@ -54,6 +55,7 @@ ship = entity:extend({
 		-- add(shots, {x=x+3, y=y-2})
 		if shotTemp == 0 then
 			shot({
+				z = 10,
 				x = x - 3,
 				y = y - 8,
 				frames = { 32, 33, 34 },
@@ -61,6 +63,7 @@ ship = entity:extend({
 				spd = 6,
 			})
 			shot({
+				z = 10,
 				x = x + 12,
 				y = y - 8,
 				frames = { 32, 33, 34 },
@@ -68,10 +71,12 @@ ship = entity:extend({
 				spd = 6,
 			})
 			muzzle({
+				z = 10,
 				x = x - 3,
 				y = y + 2,
 			})
 			muzzle({
+				z = 10,
 				x = x + 12,
 				y = y + 2,
 			})

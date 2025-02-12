@@ -36,9 +36,19 @@ entity = class:extend({
   end,
 
   each = function(_ENV, method, ...)
-    for pl in all(entity.pools) do
-      for e in all(pl) do
-        if (e[method]) e[method](e, ...)
+    -- pq(entity.pools)
+    -- for pl in #entity.pools do
+    --   pq(entity.pools[pl])
+    --   for e in all(pl) do
+    --     if (e[method]) e[method](e, ...)
+    --   end
+    -- end
+    for z in pairs(entity.pools) do
+      for i = 1, #entity.pools[z] do
+        local e = entity.pools[z][i]
+        if e and e[method] then
+          e[method](e, ...)
+        end
       end
     end
   end,
@@ -58,11 +68,12 @@ entity = class:extend({
   frames = {},
 
   init = function(_ENV)
-      entity.pools[z] = entity.pools[z] or {}
-      add(entity.pools[z], _ENV)
-      if pools[z] != entity.pools[z] then
-        add(pools[z], _ENV)
-      end
+    entity.pools[z] = entity.pools[z] or {}
+    add(entity.pools[z], _ENV)
+    if pools[z] != entity.pools[z] then
+      add(pools[z], _ENV)
+    end
+    pq(entity.pools)
   end,
 
   detect = function(_ENV, other, callback)
