@@ -31,8 +31,7 @@ entity = class:extend({
 
   extend = function(_ENV, tbl)
     tbl = class.extend(_ENV, tbl)
-    tbl.pool = {}
-    tbl.pool2 = {}
+    tbl.pools = {}
     return tbl
   end,
 
@@ -59,11 +58,6 @@ entity = class:extend({
   frames = {},
 
   init = function(_ENV)
-      -- add(entity.pool, _ENV)
-      -- if pool != entity.pool then
-      --   add(pool, _ENV)
-      -- end
-      -- pools
       entity.pools[z] = entity.pools[z] or {}
       add(entity.pools[z], _ENV)
       if pools[z] != entity.pools[z] then
