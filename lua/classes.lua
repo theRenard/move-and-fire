@@ -27,17 +27,20 @@ class = setmetatable(
 
 entity = class:extend({
   -- class
-  pool = {},
+  pools = {},
 
   extend = function(_ENV, tbl)
     tbl = class.extend(_ENV, tbl)
     tbl.pool = {}
+    tbl.pool2 = {}
     return tbl
   end,
 
   each = function(_ENV, method, ...)
-    for e in all(pool) do
-      if (e[method]) e[method](e, ...)
+    for pl in all(entity.pools) do
+      for e in all(pl) do
+        if (e[method]) e[method](e, ...)
+      end
     end
   end,
 
@@ -48,11 +51,24 @@ entity = class:extend({
   w = 8,
   h = 8,
 
+  z = 1,
+
+  -- animation
+  as = 0.5,
+  frame = 1,
+  frames = {},
+
   init = function(_ENV)
-    add(entity.pool, _ENV)
-    if pool != entity.pool then
-      add(pool, _ENV)
-    end
+      -- add(entity.pool, _ENV)
+      -- if pool != entity.pool then
+      --   add(pool, _ENV)
+      -- end
+      -- pools
+      entity.pools[z] = entity.pools[z] or {}
+      add(entity.pools[z], _ENV)
+      if pools[z] != entity.pools[z] then
+        add(pools[z], _ENV)
+      end
   end,
 
   detect = function(_ENV, other, callback)
@@ -68,10 +84,27 @@ entity = class:extend({
         and h + y > other.y
   end,
 
+  animate = function(_ENV, callback)
+    if not frames then
+      return
+    end
+    frame += as
+    if frame >= #frames then
+      frame = 1
+      if callback then
+        callback(_ENV)
+      end
+    end
+  end,
+
+  draw_animation = function(_ENV)
+    spr(frames[flr(frame)], x, y, w/8, h/8)
+  end,
+
   destroy = function(_ENV)
-    del(entity.pool, _ENV)
-    if pool != entity.pool then
-      del(pool, _ENV)
+    del(entity.pools[z], _ENV)
+    if pools[z] != entity.pools[z] then
+      del(pools[z], _ENV)
     end
   end
 })

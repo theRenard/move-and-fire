@@ -31,6 +31,7 @@ engine = entity:extend({
 })
 
 ship = entity:extend({
+	z = 2,
 	x = 60,
 	y = 60,
 	w = 7,
@@ -54,19 +55,25 @@ ship = entity:extend({
 		if shotTemp == 0 then
 			shot({
 				x = x - 3,
-				y = y + 2,
+				y = y - 8,
 				frames = { 32, 33, 34 },
-				sh = 2,
+				h = 16,
 				spd = 6,
-				si = (t() * 60 \ 10) / 2 % 3 + 1
 			})
 			shot({
 				x = x + 12,
-				y = y + 2,
+				y = y - 8,
 				frames = { 32, 33, 34 },
-				sh = 2,
+				h = 16,
 				spd = 6,
-				si = (t() * 60 \ 10) / 2 % 3 + 1
+			})
+			muzzle({
+				x = x - 3,
+				y = y + 2,
+			})
+			muzzle({
+				x = x + 12,
+				y = y + 2,
 			})
 			shotTemp = 3
 		end
@@ -109,7 +116,7 @@ ship = entity:extend({
 	end,
 
 	draw = function(_ENV)
-		add(entity.pool, del(entity.pool, _engine))
+		-- add(entity.pool, del(entity.pool, _engine))
 		spr(frames[flr(frame * 2.4 + 3.5)], xx, yy, 2, 2)
 	end
 })
