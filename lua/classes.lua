@@ -73,7 +73,7 @@ entity = class:extend({
     if pools[z] != entity.pools[z] then
       add(pools[z], _ENV)
     end
-    pq(entity.pools)
+    -- pq(entity.pools)
   end,
 
   detect = function(_ENV, other, callback)
