@@ -36,18 +36,15 @@ entity = class:extend({
   end,
 
   each = function(_ENV, method, ...)
-    -- pq(entity.pools)
-    -- for pl in #entity.pools do
-    --   pq(entity.pools[pl])
-    --   for e in all(pl) do
-    --     if (e[method]) e[method](e, ...)
-    --   end
-    -- end
-    for z in pairs(entity.pools) do
-      for i = 1, #entity.pools[z] do
-        local e = entity.pools[z][i]
-        if e and e[method] then
-          e[method](e, ...)
+    -- 20 z-layers max
+    for z = 1, 20 do
+      local pool = entity.pools[z]
+      if pool then
+        for i = 1, #pool do
+          local e = pool[i]
+          if e and e[method] then
+            e[method](e, ...)
+          end
         end
       end
     end

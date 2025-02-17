@@ -54,38 +54,38 @@ ship = entity:extend({
 		-- spawn bullet
 		-- add(shots, {x=x+3, y=y-2})
 		if shotTemp == 0 then
-			-- shot({
-			-- 	z = 10,
-			-- 	x = x - 3,
-			-- 	y = y - 8,
-			-- 	frames = { 32, 33, 34 },
-			-- 	h = 16,
-			-- 	spd = 6,
-			-- })
-			-- shot({
-			-- 	z = 10,
-			-- 	x = x + 12,
-			-- 	y = y - 8,
-			-- 	frames = { 32, 33, 34 },
-			-- 	h = 16,
-			-- 	spd = 6,
-			-- })
+			shot({
+				z = 10,
+				x = x - 3,
+				y = y - 8,
+				frames = { 32, 33, 34 },
+				h = 16,
+				spd = 6,
+			})
+			shot({
+				z = 10,
+				x = x + 12,
+				y = y - 8,
+				frames = { 32, 33, 34 },
+				h = 16,
+				spd = 6,
+			})
 			muzzle({
+				z = 11,
 				x = x + 3,
 				y = y - 7,
-				z = 10,
 				ox = 3,
 				oy = -7,
 				pos = _ENV
 			})
-			-- muzzle({
-			-- 	x = x - 4,
-			-- 	y = y - 7,
-			-- 	z = 10,
-			-- 	ox = -4,
-			-- 	oy = -7,
-			-- 	pos = _ENV
-			-- })
+			muzzle({
+				z = 11,
+				x = x - 3,
+				y = y - 7,
+				ox = -3,
+				oy = -7,
+				pos = _ENV
+			})
 			shotTemp = 3
 		end
 	end,
