@@ -90,20 +90,22 @@ entity = class:extend({
   end,
 
   animate = function(_ENV, callback)
-    if not frames then
+    if not #frames then
       return
     end
     frame += as
-    if frame >= #frames then
-      frame = 1
+    if flr(frame) > #frames then
       if callback then
         callback(_ENV)
       end
+      frame = 1
     end
   end,
 
   draw_animation = function(_ENV)
-    spr(frames[flr(frame)], x, y, w/8, h/8)
+    if (frame) then
+      spr(frames[flr(frame)], x, y, w/8, h/8)
+    end
   end,
 
   destroy = function(_ENV)

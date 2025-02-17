@@ -78,14 +78,14 @@ ship = entity:extend({
 				oy = -7,
 				pos = _ENV
 			})
-			muzzle({
-				x = x - 4,
-				y = y - 7,
-				z = 10,
-				ox = -4,
-				oy = -7,
-				pos = _ENV
-			})
+			-- muzzle({
+			-- 	x = x - 4,
+			-- 	y = y - 7,
+			-- 	z = 10,
+			-- 	ox = -4,
+			-- 	oy = -7,
+			-- 	pos = _ENV
+			-- })
 			shotTemp = 3
 		end
 	end,
